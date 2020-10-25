@@ -87,6 +87,12 @@ let friends = new FriendList();
 if(checkIfStorageEmpty()){
     showMessageInBox("No friends created. Would you like to create one?");
 }
+else{
+    // fetch data from local storage and parse it
+    let friendData = JSON.parse(localStorage.getItem("appData"));
+    friends.generateFromLocalStorage(friendData);
+    renderFriends();
+}
 
 
 
