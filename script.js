@@ -22,26 +22,60 @@ function updateLocalStorage(){
     localStorage.setItem("appData", JSON.stringify(friends));
 }
 
+function renderRecommendations(friendObj){
+    let outputHtml = "";
+    let allRecs = friendObj.recList;
+    for(let i = 0; i < friendObj.recCount; i++){
+        let displayHtml = `
+            <p>Title: ${allRecs[i].title}</p>
+        `;
+        outputHtml += displayHtml;
+    }
+
+    return outputHtml;
+}
 
 function renderFriends(){
     let outputHtml = "";
 
     // looping through friends
     for(let i = 0; i < friends.friendCount; i++){
-        let friendSectionHtml = `
-            <ul>
-                <li>${friends.getFriend(i).id}</li>
-                <li>${friends.getFriend(i).name}</li>
-            </ul>
+        let selectedFriend = friends.getFriend(i);
+        let friendDisplayHtml = `
+            <h3>${selectedFriend.name}</h3>
+        `;
+        friendDisplayHtml += renderRecommendations(selectedFriend);
+
+        // adding input field and buttons
+        friendDisplayHtml += `
+            <input type="text" id="${selectedFriend.name}_${selectedFriend.id}">
+            <button onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
         `;
 
-        // creating the html string one at a time
-        outputHtml += friendSectionHtml;
+        outputHtml += friendDisplayHtml;
     }
-
     // render in html
     document.getElementById("friend-display").innerHTML = outputHtml;
+}
 
+function addNewRec(friendID){
+    // identify the specific friend and get the associated
+    // object
+    let selectedFriend = friends.getFriend(friendID - 1);
+
+    // fetch the title text for the recommendation
+    // input element id convention: name_id
+    let inputElementId = `${selectedFriend.name}_${selectedFriend.id}`;
+    let recTitle = document.getElementById(inputElementId).value;
+    
+    // create a new rec object and add it to the array inside selectedFriend
+    selectedFriend.addRecommendation(recTitle);
+
+    // update to local storage
+    updateLocalStorage();
+
+    // render again
+    renderFriends();
 }
 
 function addNewFriend(fName){
