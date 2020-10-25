@@ -67,7 +67,12 @@ function addNewFriend(fName){
     renderFriends();
 }
 
+function showMessageInBox(messageString){
+    document.getElementById("message-box").innerHTML = messageString;
+}
+
 function addFriendOnClick(){
+    showMessageInBox("");
     let friendName = document.getElementById("friend-name").value;
     addNewFriend(friendName);
 }
@@ -80,6 +85,8 @@ function addFriendOnClick(){
 let friends = new FriendList();
 
 if(checkIfStorageEmpty()){
-    document.getElementById("message-box").innerHTML = "No friend created. Would you like to create one?";
+    showMessageInBox("No friends created. Would you like to create one?");
 }
+
+
 
