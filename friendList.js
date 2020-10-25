@@ -22,4 +22,14 @@ class FriendList{
     getFriend(fIndex){
         return this._friendList[fIndex];
     }
+
+    generateFromLocalStorage(dataObject){
+        let fList = dataObject._friendList;
+        this._friendList = [];
+        for(let i = 0; i < fList.length; i++){
+            let aFriend = new Friend();
+            aFriend.generateFromLocalStorage(fList[i]);
+            this._friendList.push(aFriend);
+        }
+    }
 }

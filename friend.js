@@ -33,4 +33,17 @@ class Friend{
     getRec(recIndex){
         return this._recList[recIndex];
     }
+
+    // dataObject: JSON Object from local storage
+    generateFromLocalStorage(dataObject){
+        this._id = dataObject._id;
+        this._name = dataObject._name;
+        let recs = dataObject._recList;
+        this._recList = []; // emptying this out
+        for(let i = 0; i < recs.length; i++){
+            let aRec = new Recommendation();
+            aRec.generateFromLocalStorage(recs[i]);
+            this._recList.push(aRec);
+        }
+    }
 }
