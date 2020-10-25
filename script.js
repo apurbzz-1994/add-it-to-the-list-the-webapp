@@ -7,6 +7,28 @@ function updateLocalStorage(){
     localStorage.setItem("appData", JSON.stringify(friends));
 }
 
+
+function renderFriends(){
+    let outputHtml = "";
+
+    // looping through friends
+    for(let i = 0; i < friends.friendCount; i++){
+        let friendSectionHtml = `
+            <ul>
+                <li>${friends.getFriend(i).id}</li>
+                <li>${friends.getFriend(i).name}</li>
+            </ul>
+        `;
+
+        // creating the html string one at a time
+        outputHtml += friendSectionHtml;
+    }
+
+    // render in html
+    document.getElementById("friendDisplay").innerHTML = outputHtml;
+
+}
+
 function addNewFriend(fName){
     let newId = 1;
     // check to see if friends is empty
@@ -19,4 +41,10 @@ function addNewFriend(fName){
         newId = lastId + 1;
         friends.addFriend(newId, fName);
     }
+
+    // update to local storage
+    updateLocalStorage();
+
+    // render all friends
+    renderFriends();
 }
