@@ -1,7 +1,12 @@
 class Friend{
-    constructor(id){
+    constructor(id, name){
         this._id = id;
+        this.name = name;
         this._recList = [];
+    }
+
+    get id(){
+        return this._id;
     }
 
     // return the recList array
