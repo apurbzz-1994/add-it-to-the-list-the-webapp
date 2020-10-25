@@ -1,6 +1,21 @@
-// primary FriendList object that'll be updated and stored in
-// local storage
-let friends = new FriendList();
+// checks if local storage is empty or not
+function checkIfStorageEmpty(){
+    let empty = false;
+    let localStorageData = localStorage.getItem("appData");
+    if(localStorageData){
+        if(localStorageData === null || typeof localStorageData == "undefined" || localStorageData === ""){
+            empty = true;
+        }
+        else{
+            empty = false;
+        }
+    }
+    else{
+        empty = true;
+    }
+    return empty;
+}
+
 
 // function to update local storage after each transaction/change
 function updateLocalStorage(){
@@ -56,3 +71,15 @@ function addFriendOnClick(){
     let friendName = document.getElementById("friend-name").value;
     addNewFriend(friendName);
 }
+
+
+// main program starts here:
+
+// primary FriendList object that'll be updated and stored in
+// local storage
+let friends = new FriendList();
+
+if(checkIfStorageEmpty()){
+    document.getElementById("message-box").innerHTML = "No friend created. Would you like to create one?";
+}
+
