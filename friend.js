@@ -13,6 +13,7 @@ class Friend{
         return this._name;
     }
 
+
     // return the recList array
     get recList(){
         return this._recList;

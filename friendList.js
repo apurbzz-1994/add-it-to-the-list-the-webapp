@@ -13,8 +13,8 @@ class FriendList{
         return this._friendList.length;
     }
 
-    addFriend(id){
-        let aNewFriend = new Friend(id);
+    addFriend(id,name){
+        let aNewFriend = new Friend(id, name);
         this._friendList.push(aNewFriend);
     }
 

@@ -25,7 +25,7 @@ function renderFriends(){
     }
 
     // render in html
-    document.getElementById("friendDisplay").innerHTML = outputHtml;
+    document.getElementById("friend-display").innerHTML = outputHtml;
 
 }
 
@@ -39,12 +39,20 @@ function addNewFriend(fName){
     // new id will be an increment of the old id
         let lastId = friends.friendList[friends.friendCount - 1].id;
         newId = lastId + 1;
+        console.log(newId);
         friends.addFriend(newId, fName);
     }
+
+    console.log(friends);
 
     // update to local storage
     updateLocalStorage();
 
     // render all friends
     renderFriends();
+}
+
+function addFriendOnClick(){
+    let friendName = document.getElementById("friend-name").value;
+    addNewFriend(friendName);
 }
