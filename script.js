@@ -130,7 +130,7 @@ function addFriendOnClick(){
 let friends = new FriendList();
 
 if(checkIfStorageEmpty()){
-    showMessageInBox("No friends created. Would you like to create one?");
+    showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
 }
 else{
     // fetch data from local storage and parse it
