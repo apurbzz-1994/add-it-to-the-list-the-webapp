@@ -65,6 +65,9 @@ function renderFriends(){
         friendDisplayHtml += "</div>";
         outputHtml += friendDisplayHtml;
     }
+    //remove message div
+    document.getElementById("message-box").style.display = "none";
+
     // render in html
     document.getElementById("friend-display").innerHTML = outputHtml;
 }
@@ -113,7 +116,7 @@ function addNewFriend(fName){
 }
 
 function showMessageInBox(messageString){
-    document.getElementById("message-box").innerHTML = messageString;
+    document.getElementById("message").innerHTML = messageString;
 }
 
 function addFriendOnClick(){
@@ -134,6 +137,7 @@ if(checkIfStorageEmpty()){
 }
 else{
     // fetch data from local storage and parse it
+    document.getElementById("message-box").style.display = "none";
     let friendData = JSON.parse(localStorage.getItem("appData"));
     friends.generateFromLocalStorage(friendData);
     renderFriends();
