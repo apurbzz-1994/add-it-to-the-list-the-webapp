@@ -1,0 +1,52 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+#heading-style{
+    background-color: #FA8C8C;
+    margin-top: 1.5em;
+    padding: 3em;
+    border-radius: 1em;
+}
+
+
+h1,h2,h3,h4,h5{
+    font-family: 'Oswald', sans-serif;
+    color: #555555;
+}
+
+.head-button {
+    margin-top: 0.5em;
+    width: 25%;
+    padding: 0.5em;
+    border-radius: 20px;
+    background-color: #FA8C8C;
+    border-color: #555555;
+    color: #555555;
+    border: 0.2em dashed #555555;
+    cursor:pointer;
+    font-weight: bold;
+
+}
+
+.head-button:hover{
+    border: 0.2em solid #555555;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  /*removing blue select border from input field*/
+  textarea:focus, input:focus{
+    outline: none;
+}
+
+/*font-family: 'Montserrat', sans-serif;
+font-family: 'Oswald', sans-serif;*/
