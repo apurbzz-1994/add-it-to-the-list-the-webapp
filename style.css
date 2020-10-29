@@ -1,5 +1,6 @@
 body{
     font-family: 'Montserrat', sans-serif;
+    color: #555555;
 }
 
 
@@ -30,11 +31,38 @@ h1,h2,h3,h4,h5{
 
 }
 
+.list-button {
+    margin-top: 0.5em;
+    width: 70%;
+    padding: 0.5em;
+    border-radius: 20px;
+    background-color: #ebf5a9;
+    border-color: #555555;
+    color: #555555;
+    border: 0.2em dashed #555555;
+    cursor:pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
 .head-button:hover{
     border: 0.2em solid #555555;
 }
 
-input[type=text] {
+.list-button:hover{
+    border: 0.2em solid #555555;
+}
+
+.header-input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  .list-input-field{
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -46,6 +74,21 @@ input[type=text] {
   /*removing blue select border from input field*/
   textarea:focus, input:focus{
     outline: none;
+}
+
+.friend-card{
+    margin-top: 2em;
+}
+
+.rec-card{
+    margin: 0.5em;
+    background-color: #ebf5a9;
+    padding: 1.5em;
+    border-radius: 1em;
+}
+
+.list-input-card{
+    margin-top: 1em;
 }
 
 /*font-family: 'Montserrat', sans-serif;

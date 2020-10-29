@@ -27,7 +27,9 @@ function renderRecommendations(friendObj){
     let allRecs = friendObj.recList;
     for(let i = 0; i < friendObj.recCount; i++){
         let displayHtml = `
-            <p>Title: ${allRecs[i].title}</p>
+        <div class = "col-12 col-md-6 col-lg-4">
+            <div class = "rec-card">${allRecs[i].title}</div>
+        </div>
         `;
         outputHtml += displayHtml;
     }
@@ -42,16 +44,25 @@ function renderFriends(){
     for(let i = 0; i < friends.friendCount; i++){
         let selectedFriend = friends.getFriend(i);
         let friendDisplayHtml = `
-            <h3>${selectedFriend.name}</h3>
+        <div class = "col-12 col-md-12 col-lg-12 friend-card">
+        <h3>${selectedFriend.name}'s Recommendations</h3>
+        <div class = "row">
         `;
         friendDisplayHtml += renderRecommendations(selectedFriend);
+        friendDisplayHtml += "</div>";
 
         // adding input field and buttons
         friendDisplayHtml += `
-            <input type="text" id="${selectedFriend.name}_${selectedFriend.id}">
-            <button onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
+            <div class = "row">
+                <div class = "col-12 col-md-6 col-lg-4">
+                    <div class = "rec-card">
+                    <input type="text" class = "list-input-field" id="${selectedFriend.name}_${selectedFriend.id}" placeholder="${selectedFriend.name} recommends...">
+                    <button class = "list-button" onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
+                    </div>
+                </div>
+            </div>
         `;
-
+        friendDisplayHtml += "</div>";
         outputHtml += friendDisplayHtml;
     }
     // render in html
