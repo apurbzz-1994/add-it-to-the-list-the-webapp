@@ -25,15 +25,26 @@ function updateLocalStorage(){
 function renderRecommendations(friendObj){
     let outputHtml = "";
     let allRecs = friendObj.recList;
-    for(let i = 0; i < friendObj.recCount; i++){
-        let displayHtml = `
+    // check if recommendations are empty
+    if(friendObj.recCount == 0){
+        let displayHtml =  `
         <div class = "col-12 col-md-6 col-lg-4">
-            <div class = "rec-card">${allRecs[i].title}</div>
+        <div class = "rec-card">This friend has no recommendations...</div>
         </div>
         `;
+
         outputHtml += displayHtml;
     }
-
+    else{
+        for(let i = 0; i < friendObj.recCount; i++){
+            let displayHtml = `
+            <div class = "col-12 col-md-6 col-lg-4">
+                <div class = "rec-card">${allRecs[i].title}</div>
+            </div>
+            `;
+            outputHtml += displayHtml;
+        }
+    }
     return outputHtml;
 }
 
