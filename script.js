@@ -1,7 +1,7 @@
 // checks if local storage is empty or not
-function checkIfStorageEmpty(){
+function checkIfStorageEmpty(storageKey){
     let empty = false;
-    let localStorageData = localStorage.getItem("appData");
+    let localStorageData = localStorage.getItem(storageKey);
     if(localStorageData){
         if(localStorageData === null || typeof localStorageData == "undefined" || localStorageData === ""){
             empty = true;
@@ -17,9 +17,16 @@ function checkIfStorageEmpty(){
 }
 
 
+
 // function to update local storage after each transaction/change
-function updateLocalStorage(){
-    localStorage.setItem("appData", JSON.stringify(friends));
+function updateLocalStorage(storageKey){
+    if(storageKey === "appData"){
+        localStorage.setItem("appData", JSON.stringify(friends));
+    }
+    else if(storageKey === "categoryData"){
+        localStorage.setItem("categoryData", JSON.stringify(categories));
+    }
+    
 }
 
 function renderRecommendations(friendObj){
@@ -84,6 +91,48 @@ function renderFriends(){
     document.getElementById("friend-display").innerHTML = outputHtml;
 }
 
+
+function renderCategories(){
+    let outputHtml = "";
+
+    // looping through categories array
+    for(let i = 0; i < categories.categoryCount; i++){
+        let selectedCategory = categories.getCategory(i);
+        let categoryDisplayHtml = `
+            <div class = "col-12 col-md-4 col-lg-4">${selectedCategory.name}</div>
+        `;
+
+        outputHtml += categoryDisplayHtml;
+    }
+
+    // render in html
+    document.getElementById("category-display").innerHTML = outputHtml;
+}
+
+function addNewCategory(cName){
+    let newId = 1;
+    if(categories.categoryCount == 0){
+        categories.addNewCategory(newId, cName); 
+    }
+    else{
+        let lastId = categories.categories[categories.categoryCount - 1].id;
+        newId = lastId + 1;
+        categories.addNewCategory(newId, cName);
+    }
+
+    // update to local storage
+    updateLocalStorage("categoryData");
+
+    // render all categories
+    renderCategories();
+}
+
+function addCategoryOnClick(){
+    let categoryName = document.getElementById("category-name").value;
+    addNewCategory(categoryName);
+}
+
+
 function addNewRec(friendID){
     // identify the specific friend and get the associated
     // object
@@ -105,7 +154,7 @@ function addNewRec(friendID){
         selectedFriend.addRecommendation(recTitle);
 
         // update to local storage
-        updateLocalStorage();
+        updateLocalStorage("appData");
 
         // render again
         renderFriends();
@@ -129,7 +178,7 @@ function addNewFriend(fName){
     console.log(friends);
 
     // update to local storage
-    updateLocalStorage();
+    updateLocalStorage("appData");
 
     // render all friends
     renderFriends();
@@ -179,7 +228,7 @@ function changeToFriendDisplay(){
 
     
 
-    if(checkIfStorageEmpty()){
+    if(checkIfStorageEmpty("appData")){
         showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
     }
     else{
@@ -205,6 +254,20 @@ function changeToCategoryDisplay(){
 
     document.getElementById("friend-view").style.display = "none";
     document.getElementById("category-view").style.display = "block";
+
+
+    if(checkIfStorageEmpty("categoryData")){
+        //showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
+        alert("No categories present");
+    }
+    else{
+        // fetch data from local storage and parse it
+        //document.getElementById("message-box").style.display = "none";
+        let categoryData = JSON.parse(localStorage.getItem("categoryData"));
+        categories.generateFromLocalStorage(categoryData);
+        console.log(categories);
+        renderCategories();
+    }
 }
 
 
@@ -213,6 +276,7 @@ function changeToCategoryDisplay(){
 // primary FriendList object that'll be updated and stored in
 // local storage
 let friends = new FriendList();
+let categories = new categoryList();
 
 changeToFriendDisplay();
 

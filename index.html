@@ -53,7 +53,16 @@
         <!--Category display-->
         <div class = "row" id = "category-view">
             <div class = "col-12 col-md-12 col-lg-12">
-                <p>This is where all the categories would go...</p>
+                <div class = "row">
+                    <div class = "col-md-6 offset-md-3" style="text-align: center; padding: 2em;">
+                        <input class = "header-input-field" type="text" id="category-name" placeholder="Add a new category">
+                        <div id = "category-input-error" class="input-error-message"></div>
+                        <button class="page-button" onclick="addCategoryOnClick()">Add</button>
+                    </div>
+                </div>
+                <div class = "row" id="category-display">
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -64,6 +73,8 @@
     <script src="recommendation.js"></script>
     <script src="friend.js"></script>
     <script src="friendList.js"></script>
+    <script src="category.js"></script>
+    <script src="categoryList.js"></script>
     <script src = "script.js"></script>
 </body>
 </html>
