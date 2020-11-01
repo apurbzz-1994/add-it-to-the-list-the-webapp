@@ -2,3 +2,6 @@
 A webapp that helps you organize and keep track of all the recommendations your friends keep imposing on you.
 
 ## Work in progress...
+
+![Desktop view](/assets/desktop-display.png)
+![Phone view](/assets/mobile-display.png)
