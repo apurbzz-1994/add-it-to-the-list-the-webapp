@@ -17,7 +17,6 @@ function checkIfStorageEmpty(storageKey){
 }
 
 
-
 // function to update local storage after each transaction/change
 function updateLocalStorage(storageKey){
     if(storageKey === "appData"){
@@ -99,11 +98,18 @@ function renderCategories(){
     for(let i = 0; i < categories.categoryCount; i++){
         let selectedCategory = categories.getCategory(i);
         let categoryDisplayHtml = `
-            <div class = "col-12 col-md-4 col-lg-4">${selectedCategory.name}</div>
+            <div class = "col-12 col-md-4 col-lg-4">
+            <div class = "category-card">
+            ${selectedCategory.name}
+            </div>
+            </div>
         `;
 
         outputHtml += categoryDisplayHtml;
     }
+
+    //remove message div
+    document.getElementById("message-c-box").style.display = "none";
 
     // render in html
     document.getElementById("category-display").innerHTML = outputHtml;
@@ -129,7 +135,23 @@ function addNewCategory(cName){
 
 function addCategoryOnClick(){
     let categoryName = document.getElementById("category-name").value;
-    addNewCategory(categoryName);
+    if(categoryName === "" || !categoryName){
+        document.getElementById("category-name").style.borderColor = "#b55921";
+        document.getElementById("category-input-error").style.display = "block";
+        document.getElementById("category-input-error").innerHTML = "<p><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> The category name wasn't typed in</p>";
+    }
+    else{
+        // clear the no friends added message 
+        showMessageInBox("", "message-c");
+
+        document.getElementById("category-name").style.borderColor = "#ccc";
+        document.getElementById("category-input-error").style.display = "none";
+        addNewCategory(categoryName);
+
+        // clear text field
+        document.getElementById("category-name").value = "";
+    }
+    
 }
 
 
@@ -184,11 +206,11 @@ function addNewFriend(fName){
     renderFriends();
 }
 
-function showMessageInBox(messageString){
+function showMessageInBox(messageString, boxSelect){
     let finalMessage = `
     <h3 class="fa fa-info-circle" aria-hidden="true"></h3>
     <p>${messageString}</p>`;
-    document.getElementById("message").innerHTML = finalMessage;
+    document.getElementById(boxSelect).innerHTML = finalMessage;
 }
 
 function addFriendOnClick(){
@@ -200,9 +222,8 @@ function addFriendOnClick(){
     }
     else{
 
-
         // clear the no friends added message 
-        showMessageInBox("");
+        showMessageInBox("", "message");
 
         document.getElementById("friend-name").style.borderColor = "#ccc";
         document.getElementById("friend-input-error").style.display = "none";
@@ -229,7 +250,7 @@ function changeToFriendDisplay(){
     
 
     if(checkIfStorageEmpty("appData")){
-        showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
+        showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!", "message");
     }
     else{
         // fetch data from local storage and parse it
@@ -257,12 +278,11 @@ function changeToCategoryDisplay(){
 
 
     if(checkIfStorageEmpty("categoryData")){
-        //showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
-        alert("No categories present");
+        showMessageInBox("No categories created. Add a new category to assign to recommendations.", "message-c");
     }
     else{
         // fetch data from local storage and parse it
-        //document.getElementById("message-box").style.display = "none";
+        document.getElementById("message-c-box").style.display = "none";
         let categoryData = JSON.parse(localStorage.getItem("categoryData"));
         categories.generateFromLocalStorage(categoryData);
         console.log(categories);

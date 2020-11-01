@@ -125,6 +125,12 @@ h1,h2,h3,h4,h5{
     color: #b55921;
 }
 
+.category-card{
+    padding: 1em;
+    margin-top: 1em;
+    background-color: whitesmoke;
+}
+
 
 /*font-family: 'Montserrat', sans-serif;
 font-family: 'Oswald', sans-serif;*/
