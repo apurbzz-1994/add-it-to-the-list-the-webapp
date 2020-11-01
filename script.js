@@ -29,7 +29,7 @@ function renderRecommendations(friendObj){
     if(friendObj.recCount == 0){
         let displayHtml =  `
         <div class = "col-12 col-md-6 col-lg-4">
-        <div class = "rec-card">This friend has no recommendations...</div>
+        <div class = "rec-card"><i class="fa fa-info-circle" aria-hidden="true"></i> This friend has no recommendations...</div>
         </div>
         `;
 
@@ -98,7 +98,7 @@ function addNewRec(friendID){
     // empty field validation check
     if(recTitle === "" || !recTitle){
         document.getElementById(inputElementId).style.borderColor = "#b55921";
-        document.getElementById(errorMessageId).innerText = "No recommendation typed in";
+        document.getElementById(errorMessageId).innerHTML = "<p><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> No recommendation typed in</p>";
     }
     else{
          // create a new rec object and add it to the array inside selectedFriend
@@ -136,7 +136,10 @@ function addNewFriend(fName){
 }
 
 function showMessageInBox(messageString){
-    document.getElementById("message").innerHTML = messageString;
+    let finalMessage = `
+    <h3 class="fa fa-info-circle" aria-hidden="true"></h3>
+    <p>${messageString}</p>`;
+    document.getElementById("message").innerHTML = finalMessage;
 }
 
 function addFriendOnClick(){
@@ -144,7 +147,7 @@ function addFriendOnClick(){
     if(friendName === "" || !friendName){
         document.getElementById("friend-name").style.borderColor = "#b55921";
         document.getElementById("friend-input-error").style.display = "block";
-        document.getElementById("friend-input-error").innerText = "Your friend's name wasn't typed in";
+        document.getElementById("friend-input-error").innerHTML = "<p><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Your friend's name wasn't typed in</p>";
     }
     else{
 
