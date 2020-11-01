@@ -12,4 +12,10 @@ class Category{
     get name(){
         return this._name;
     }
+
+    generateFromLocalStorage(dataObject){
+        this._id = dataObject._id;
+        this._name = dataObject._name;
+        this._colorValue = dataObject._colorValue;
+    }
 }

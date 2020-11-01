@@ -78,6 +78,10 @@ h1,h2,h3,h4,h5{
     border: 0.2em solid #555555;
 }
 
+.page-button:hover{
+    border: 0.2em solid #555555;
+}
+
 .header-input-field {
     width: 100%;
     padding: 12px;
