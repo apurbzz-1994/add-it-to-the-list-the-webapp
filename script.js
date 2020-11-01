@@ -165,6 +165,16 @@ function addFriendOnClick(){
 function changeToFriendDisplay(){
     document.getElementById("friend-view").style.display = "block";
     document.getElementById("category-view").style.display = "none";
+    
+    // change button highlight
+    let friendButton = document.getElementById("friend-selected").classList;
+    let categoryButton = document.getElementById("category-selected").classList;
+    friendButton.remove("head-button");
+    friendButton.add("selected-head-button");
+    categoryButton.remove("selected-head-button");
+    categoryButton.add("head-button");
+
+    
 
     if(checkIfStorageEmpty()){
         showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
@@ -180,6 +190,16 @@ function changeToFriendDisplay(){
 
 
 function changeToCategoryDisplay(){
+    // change button highlight
+    let friendButton = document.getElementById("friend-selected").classList;
+    let categoryButton = document.getElementById("category-selected").classList;
+
+    friendButton.remove("selected-head-button");
+    friendButton.add("head-button");
+    categoryButton.remove("head-button");
+    categoryButton.add("selected-head-button");
+
+
     document.getElementById("friend-view").style.display = "none";
     document.getElementById("category-view").style.display = "block";
 }
