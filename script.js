@@ -162,22 +162,42 @@ function addFriendOnClick(){
 }
 
 
+function changeToFriendDisplay(){
+    document.getElementById("friend-view").style.display = "block";
+    document.getElementById("category-view").style.display = "none";
+
+    if(checkIfStorageEmpty()){
+        showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
+    }
+    else{
+        // fetch data from local storage and parse it
+        document.getElementById("message-box").style.display = "none";
+        let friendData = JSON.parse(localStorage.getItem("appData"));
+        friends.generateFromLocalStorage(friendData);
+        renderFriends();
+    }
+}
+
+
+function changeToCategoryDisplay(){
+    document.getElementById("friend-view").style.display = "none";
+    document.getElementById("category-view").style.display = "block";
+}
+
+
 // main program starts here:
 
 // primary FriendList object that'll be updated and stored in
 // local storage
 let friends = new FriendList();
 
-if(checkIfStorageEmpty()){
-    showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!");
-}
-else{
-    // fetch data from local storage and parse it
-    document.getElementById("message-box").style.display = "none";
-    let friendData = JSON.parse(localStorage.getItem("appData"));
-    friends.generateFromLocalStorage(friendData);
-    renderFriends();
-}
+changeToFriendDisplay();
+
+
+
+
+
+
 
 
 

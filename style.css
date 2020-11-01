@@ -22,13 +22,12 @@ h1,h2,h3,h4,h5{
     width: 25%;
     padding: 0.5em;
     border-radius: 20px;
-    background-color: #FA8C8C;
+    background-color: white;
     border-color: #555555;
     color: #555555;
     border: 0.2em dashed #555555;
     cursor:pointer;
     font-weight: bold;
-
 }
 
 .list-button {

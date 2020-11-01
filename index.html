@@ -20,29 +20,37 @@
     <div class = "container">
         <!--header-->
         <div class = "row" id="heading-style">
+            <div class = "col-12 col-md-12 col-lg-12" style="padding: 2em; text-align: center;">
+                <h1>Add it to the list!</h1>
+                <input type="button" value="See Friends" onclick="changeToFriendDisplay()" />
+                <input type="button" value="See Categories" onclick="changeToCategoryDisplay()" />
+            </div>
+        </div>
+        <!--friend recommendation display-->
+        <div class = "row" id = "friend-view">
             <div class = "col-12 col-md-12 col-lg-12">
                 <div class = "row">
-                    <div class = "col-12 col-md-8 col-lg-8" style="padding: 2em;">
-                        <h1>Add it to the list!</h1>
-                        <div>
-                            <input class = "header-input-field" type="text" id="friend-name" placeholder="Add a new friend">
-                            <div id = "friend-input-error" class="input-error-message"></div>
-                            <button class="head-button" onclick="addFriendOnClick()">Add</button>
-                        </div>
+                    <div class = "col-md-6 offset-md-3" style="text-align: center; padding: 2em;">
+                        <input class = "header-input-field" type="text" id="friend-name" placeholder="Add a new friend">
+                        <div id = "friend-input-error" class="input-error-message"></div>
+                        <button class="head-button" onclick="addFriendOnClick()">Add</button>
                     </div>
-                    <div class = "col-12 col-md-4 col-lg-4" style="padding: 2em;">
-                        
+                </div>
+                <div class = "row">
+                    <div class = "col-12 col-md-12 col-lg-12" id="message-box">
+                        <div id = "message" style="padding: 5em; text-align: center;"></div>
                     </div>
+                </div>
+                <div class = "row" id="friend-display">
+                    
                 </div>
             </div>
         </div>
-        <div class = "row">
-            <div class = "col-12 col-md-12 col-lg-12" id="message-box">
-                <div id = "message" style="padding: 5em; text-align: center;"></div>
+        <!--Category display-->
+        <div class = "row" id = "category-view">
+            <div class = "col-12 col-md-12 col-lg-12">
+                <p>This is where all the categories would go...</p>
             </div>
-        </div>
-        <div class = "row" id="friend-display">
-            
         </div>
     </div>
 
