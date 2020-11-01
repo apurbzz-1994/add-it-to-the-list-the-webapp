@@ -57,6 +57,7 @@ function renderFriends(){
                 <div class = "col-12 col-md-6 col-lg-4">
                     <div class = "rec-card">
                     <input type="text" class = "list-input-field" id="${selectedFriend.name}_${selectedFriend.id}" placeholder="${selectedFriend.name} recommends...">
+                    <div id = "${selectedFriend.id}-error-message" class="input-error-message"></div>
                     <button class = "list-button" onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
                     </div>
                 </div>
@@ -80,16 +81,24 @@ function addNewRec(friendID){
     // fetch the title text for the recommendation
     // input element id convention: name_id
     let inputElementId = `${selectedFriend.name}_${selectedFriend.id}`;
+    let errorMessageId = `${selectedFriend.id}-error-message`;
     let recTitle = document.getElementById(inputElementId).value;
-    
-    // create a new rec object and add it to the array inside selectedFriend
-    selectedFriend.addRecommendation(recTitle);
 
-    // update to local storage
-    updateLocalStorage();
+    // empty field validation check
+    if(recTitle === "" || !recTitle){
+        document.getElementById(inputElementId).style.borderColor = "#b55921";
+        document.getElementById(errorMessageId).innerText = "No recommendation typed in";
+    }
+    else{
+         // create a new rec object and add it to the array inside selectedFriend
+        selectedFriend.addRecommendation(recTitle);
 
-    // render again
-    renderFriends();
+        // update to local storage
+        updateLocalStorage();
+
+        // render again
+        renderFriends();
+    }
 }
 
 function addNewFriend(fName){
@@ -120,9 +129,25 @@ function showMessageInBox(messageString){
 }
 
 function addFriendOnClick(){
-    showMessageInBox("");
     let friendName = document.getElementById("friend-name").value;
-    addNewFriend(friendName);
+    if(friendName === "" || !friendName){
+        document.getElementById("friend-name").style.borderColor = "#b55921";
+        document.getElementById("friend-input-error").style.display = "block";
+        document.getElementById("friend-input-error").innerText = "Your friend's name wasn't typed in";
+    }
+    else{
+
+
+        // clear the no friends added message 
+        showMessageInBox("");
+
+        document.getElementById("friend-name").style.borderColor = "#ccc";
+        document.getElementById("friend-input-error").style.display = "none";
+        addNewFriend(friendName);
+
+        // clear text field
+        document.getElementById("friend-name").value = "";
+    }   
 }
 
 
