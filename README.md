@@ -10,6 +10,9 @@ Well, now you can!
 ## Work in progress...
 Here are a few screenshots of the current version:
 
+Start page
 ![Start page](/assets/start.png)
+Recommendation view
 ![Friends view](/assets/friends.png)
+Categories
 ![Categories view](/assets/categories.png)
