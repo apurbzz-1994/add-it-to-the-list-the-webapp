@@ -69,7 +69,6 @@ function renderRecommendations(friendObj){
 
 
 function renderAllCategories(){
-    console.log("This function works");
     let totalHtml = "";
     let allCategories = categories.categories;
     // looping through all the categories
@@ -82,6 +81,7 @@ function renderAllCategories(){
 
     return totalHtml;
 }
+
 
 
 function renderFriends(){
@@ -128,6 +128,45 @@ function renderFriends(){
 }
 
 
+
+// returns an array of objects containing info regarding all recs matching 
+// the category id provided
+function returnAllRecsWithMatchingCategory(categoryId){
+    let selectedMatchedRecs = [];
+    let allFriends = friends.friendList;
+    for(let eachFriend of allFriends){
+        let allRecs = eachFriend.recList;
+        for(let eachRec of allRecs){
+            if(eachRec.category === categoryId){
+                let recInfo = {
+                    "friendName" : eachFriend.name,
+                    "rec" : eachRec.title
+                };
+                selectedMatchedRecs.push(recInfo);
+            }
+        }
+    }
+    return selectedMatchedRecs;
+}
+
+function renderRecsForGivenCategory(categoryId){
+    let recsToRender = returnAllRecsWithMatchingCategory(categoryId);
+    let totalHtml = "";
+    for(let eachRecInfo of recsToRender){
+        let htmlChunk = `<div class = "category-rec-card">
+        <blockquote class="blockquote">
+        <p class="mb-0">${eachRecInfo.rec}</p>
+        <footer class="blockquote-footer"><cite>${eachRecInfo.friendName}</cite></footer>
+        </blockquote>
+        </div>`;
+        totalHtml += htmlChunk;
+    }
+
+    return totalHtml;
+}
+
+
+// render categoreis in the category page
 function renderCategories(){
     let outputHtml = "";
 
@@ -137,10 +176,12 @@ function renderCategories(){
         let categoryDisplayHtml = `
             <div class = "col-12 col-md-4 col-lg-4">
             <div class = "category-card">
-            ${selectedCategory.name}
-            </div>
-            </div>
+            <h5>${selectedCategory.name}</h5>
         `;
+        categoryDisplayHtml += renderRecsForGivenCategory(`${selectedCategory.id}`);
+
+        categoryDisplayHtml += ` </div>
+        </div>`;
 
         outputHtml += categoryDisplayHtml;
     }
