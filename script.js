@@ -45,9 +45,21 @@ function renderRecommendations(friendObj){
         for(let i = 0; i < friendObj.recCount; i++){
             let displayHtml = `
             <div class = "col-12 col-md-6 col-lg-4">
-                <div class = "rec-card">${allRecs[i].title}</div>
-            </div>
+                <div class = "rec-card">
+                <h5>${allRecs[i].title}</h5>
             `;
+
+            if(allRecs[i].category === "0"){
+                displayHtml += `<p>Uncategorized</p>`;
+            }
+            else{
+                let categoryIndex = (parseInt(allRecs[i].category) - 1);
+                let categoryToDisplay = categories.getCategory(categoryIndex).name;
+                displayHtml += `<p>${categoryToDisplay}</p>`;
+            }
+
+            displayHtml += ` </div>
+            </div>`;
             outputHtml += displayHtml;
         }
     }
@@ -63,7 +75,7 @@ function renderAllCategories(){
     // looping through all the categories
     for(let eachCategory of allCategories){
         let htmlChunk = `
-            <option>${eachCategory.name}</option>
+            <option value = ${eachCategory.id}>${eachCategory.name}</option>
         `;
         totalHtml += htmlChunk;
     }
@@ -94,7 +106,7 @@ function renderFriends(){
                     <input type="text" class = "list-input-field" id="${selectedFriend.name}_${selectedFriend.id}" placeholder="${selectedFriend.name} recommends...">
                     <div id = "${selectedFriend.id}-error-message" class="input-error-message"></div>
                     <select class="form-control category-select" id="${selectedFriend.name}_${selectedFriend.id}_select">
-                        <option>Pick a category</option>
+                        <option value = "0">Pick a category</option>
         `;
 
         // rendering all the categories
@@ -189,7 +201,11 @@ function addNewRec(friendID){
     // input element id convention: name_id
     let inputElementId = `${selectedFriend.name}_${selectedFriend.id}`;
     let errorMessageId = `${selectedFriend.id}-error-message`;
+    let selectorElementId = `${selectedFriend.name}_${selectedFriend.id}_select`;
     let recTitle = document.getElementById(inputElementId).value;
+    let recCategory = document.getElementById(selectorElementId).value;
+
+
 
     // empty field validation check
     if(recTitle === "" || !recTitle){
@@ -198,7 +214,7 @@ function addNewRec(friendID){
     }
     else{
          // create a new rec object and add it to the array inside selectedFriend
-        selectedFriend.addRecommendation(recTitle);
+        selectedFriend.addRecommendation(recTitle, recCategory);
 
         // update to local storage
         updateLocalStorage("appData");
@@ -314,7 +330,6 @@ function changeToCategoryDisplay(){
         document.getElementById("message-c-box").style.display = "none";
         let categoryData = JSON.parse(localStorage.getItem("categoryData"));
         categories.generateFromLocalStorage(categoryData);
-        console.log(categories);
         renderCategories();
     }
 }

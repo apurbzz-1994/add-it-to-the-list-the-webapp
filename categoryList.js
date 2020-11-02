@@ -1,6 +1,7 @@
 class categoryList{
     constructor(){
         this._categories = [];
+        
     }
 
     get categories(){

@@ -1,11 +1,11 @@
 // Recommendation class
 
 class Recommendation {
-    constructor(title){
+    constructor(title, category){
         this._title = title;
         this._description = "";
         this._likelihoodRating = 0;
-        this._category = "";
+        this._category = category;
         this._done = false;
         this._link = "";
     }

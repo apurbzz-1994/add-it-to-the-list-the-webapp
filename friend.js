@@ -24,8 +24,8 @@ class Friend{
         return this._recList.length;
     }
 
-    addRecommendation(title){
-        let aNewRec = new Recommendation(title);
+    addRecommendation(title, category){
+        let aNewRec = new Recommendation(title, category);
         this._recList.push(aNewRec);
     }
 
