@@ -54,6 +54,24 @@ function renderRecommendations(friendObj){
     return outputHtml;
 }
 
+
+
+function renderAllCategories(){
+    console.log("This function works");
+    let totalHtml = "";
+    let allCategories = categories.categories;
+    // looping through all the categories
+    for(let eachCategory of allCategories){
+        let htmlChunk = `
+            <option>${eachCategory.name}</option>
+        `;
+        totalHtml += htmlChunk;
+    }
+
+    return totalHtml;
+}
+
+
 function renderFriends(){
     let outputHtml = "";
 
@@ -75,11 +93,18 @@ function renderFriends(){
                     <div class = "rec-card">
                     <input type="text" class = "list-input-field" id="${selectedFriend.name}_${selectedFriend.id}" placeholder="${selectedFriend.name} recommends...">
                     <div id = "${selectedFriend.id}-error-message" class="input-error-message"></div>
-                    <button class = "list-button" onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
-                    </div>
-                </div>
-            </div>
+                    <select class="form-control category-select" id="${selectedFriend.name}_${selectedFriend.id}_select">
+                        <option>Pick a category</option>
         `;
+
+        // rendering all the categories
+        friendDisplayHtml += renderAllCategories();
+
+        friendDisplayHtml += ` </select>
+        <button class = "list-button" onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
+        </div>
+        </div>
+        </div>`;
         friendDisplayHtml += "</div>";
         outputHtml += friendDisplayHtml;
     }
@@ -253,6 +278,10 @@ function changeToFriendDisplay(){
         showMessageInBox("No friends created. Add a new friend to start keeping track of all the recommendations they keep imposing on you!", "message");
     }
     else{
+        // load the category array on startup as well
+        let categoryData = JSON.parse(localStorage.getItem("categoryData"));
+        categories.generateFromLocalStorage(categoryData);
+
         // fetch data from local storage and parse it
         document.getElementById("message-box").style.display = "none";
         let friendData = JSON.parse(localStorage.getItem("appData"));
