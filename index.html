@@ -25,9 +25,14 @@
         <div class = "row" id="heading-style">
             <div class = "col-12 col-md-12 col-lg-12" style="padding: 2em; text-align: center;">
                 <h1>Add it to the list!</h1>
-                <input type="button" id="friend-selected" value="See Friends" class="head-button" onclick="changeToFriendDisplay()" />
-                <input type="button" id = "category-selected" value="See Categories" class="head-button" onclick="changeToCategoryDisplay()" />
-                <input type="button" id = "category-view-selected" value="Category View" class="head-button" />
+                <div class = "row">
+                    <div class = "col-12 col-md-6 col-lg-6">
+                        <input type="button" id="friend-selected" value="Friends" class="head-button" onclick="changeToFriendDisplay()" />
+                    </div>
+                    <div class = "col-12 col-md-6 col-lg-6">
+                        <input type="button" id = "category-selected" value="Categories" class="head-button" onclick="changeToCategoryDisplay()" />
+                    </div>
+                </div>
             </div>
         </div>
         <!--friend recommendation display-->
