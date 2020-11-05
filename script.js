@@ -96,11 +96,10 @@ function renderFriends(){
         <div class = "row">
         `;
         friendDisplayHtml += renderRecommendations(selectedFriend);
-        friendDisplayHtml += "</div>";
+        
 
         // adding input field and buttons
         friendDisplayHtml += `
-            <div class = "row">
                 <div class = "col-12 col-md-6 col-lg-4">
                     <div class = "rec-card">
                     <input type="text" class = "list-input-field" id="${selectedFriend.name}_${selectedFriend.id}" placeholder="${selectedFriend.name} recommends...">
@@ -115,9 +114,8 @@ function renderFriends(){
         friendDisplayHtml += ` </select>
         <button class = "list-button" onclick="addNewRec(${selectedFriend.id})">Add it to the list!</button>
         </div>
-        </div>
         </div>`;
-        friendDisplayHtml += "</div>";
+        friendDisplayHtml += "</div></div>";
         outputHtml += friendDisplayHtml;
     }
     //remove message div
